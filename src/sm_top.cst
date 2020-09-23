@@ -1,0 +1,7 @@
+IO_LOC "rst_n" 15;
+IO_LOC "led_rgb[0]" 16;
+IO_LOC "led_rgb[1]" 17;
+IO_LOC "led_rgb[2]" 18;
+IO_LOC "fpga_rx" 9;
+IO_LOC "fpga_tx" 8;
+

@@ -1,0 +1,75 @@
+; Others tests
+;  by yoshiki9636
+
+NOP
+PUSH I 00
+OUT 00
+:loop1
+PUSH I 03
+PUSH I 04
+POP
+POP
+ADD AB
+POP
+CMP I 07
+JMP Z loop2
+JMP IM loop1
+:loop2
+PUSH I 01
+OUT 00
+PUSH I 09
+PUSH I 07
+POP
+POP
+SUB AB
+PUSH I 02
+POP
+POP
+CMP AB
+JMP Z loop3
+JMP IM loop2
+:loop3
+PUSH I 02
+OUT 00
+PUSH I f0
+PUSH I 10
+POP
+POP
+ADD AB
+POP
+JMP C loop4
+JMP IM loop3
+:loop4
+PUSH I 03
+OUT 00
+PUSH I f0
+PUSH I ff
+POP
+POP
+SUB AB
+POP
+JMP C loop5
+JMP IM loop4
+:loop5
+PUSH I 04
+OUT 00
+PUSH I e0
+POP
+ADD I 20
+POP
+JMP C loop6
+JMP IM loop5
+:loop6
+PUSH I 05
+OUT 00
+PUSH I 02
+POP
+SUB I 03
+POP
+JMP C loop7
+JMP IM loop6
+:loop7
+PUSH I 07
+OUT 00
+JMP IM loop7
+
