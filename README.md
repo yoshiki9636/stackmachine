@@ -2,7 +2,7 @@
 
 This repository is stack machine CPU for Tang Nano FPGA.
 
-Specification:
+#Specification:
 
 - 8bit data stack machine archtecture with uart debugger
 - Instruction: 8bit or 16bit word length
@@ -15,7 +15,7 @@ Specification:
 - Data reg_b is set reg_a's data when pop stack
 - Uart: controlling load programs, reading wiriting memory, excecutions, and monitoring
 
-Instructions:
+#Instructions:
 - 1st byte 7:4 : opecode
 - 1st byte 3:0 : control bits
 - 2nd byte 7:0 : Immediate value or jump address (2byte instruction only)
@@ -103,6 +103,30 @@ Instructions:
 
               Only step PC up
 
+#Uart monitor
+
+Uart monitor can use to control CPU, read/write memory, monitor CPU status.
+Control commands
+
+- g XX : Execute CPU form address XX
+
+- w XX : Write instruction memory from address XX
+
+- r XX YY : Dump instruction memory between XX and YY
+
+- p : Dump data stack memory
+
+- s : Step CPU execution
+
+- t : Trash and fill 0 to instuction memory, data stack, registers, flags 
+
+- q :  Quit : using g and w
+
+Command g and s : Output log to uart. Each instruction makes log 
+
+                  incuding PC, instruction bytes, flag, reg_a, reg_b, stack pointer
+                  
+Command r and p : Dump memory with 4 bytes per line.
 
 
 
