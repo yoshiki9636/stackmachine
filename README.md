@@ -22,13 +22,21 @@ Instructions:
 
 
 - opecode: 0 : JMP
+
                Jump command controlled by flag bits
+               
                bit 3 : Stack Underflow : 1: data stack underflow : can be cleard by uart
+               
                bit 2 : Stack Overflow : 1: data stack underflow : can be cleard by uart
+               
                bit 1 : Carry : 1: previouse calculation results carry 
+               
                bit 0 : Zero : 1: previouse calculation results zero value
+               
                                  calculation: ADD SUB CMP only
+                                 
                none : Immediate Jump
+               
                2nd byte : Jump address
 
 - opecode 2 : POP
