@@ -25,9 +25,9 @@ Instructions:
 
                Jump command controlled by flag bits
                
-               bit 3 : Stack Underflow : 1: data stack underflow : can be cleard by uart
+               bit 3 : Stack Underflow : 1: data stack underflow : can be cleard by CLR
                
-               bit 2 : Stack Overflow : 1: data stack underflow : can be cleard by uart
+               bit 2 : Stack Overflow : 1: data stack underflow : can be cleard by CLR
                
                bit 1 : Carry : 1: previouse calculation results carry 
                
@@ -40,42 +40,72 @@ Instructions:
                2nd byte : Jump address
 
 - opecode 2 : POP
+
               Pop 1 value from data stack and store reg_a
+              
               reg_b also stored reg_a's previouse value
               
 - opecode 4 : PUSH
+
               Push 1 value to data stack
+              
               value can be used as reg_a, reg_b and Immediate
+              
               bit 1: reg_b selected
+              
               bit 0: reg_a selected
+              
               none : Immediate value selected
+              
               2nd byte : Immediate value (when immediate selected)
 
-  4 : PSH A,B or Immediate (16bit ops) byte1; Immediate value
-          | 1:0 |
-            0:A
-　　　　　　1:B
-            none : Immediate
+- opecode 6 : ADD
 
-　6 : ADD A and B or Immediate values, PUSH result and change flags
-          | 1:0 |
-            0:AB
-            none : Immediate
+              Add reg_a and reg_b or Immediate value, push result to data stack and change flags
+              
+              bit 0: Add reg_a and reg_b
+              
+              none : Add reg_a and Immediate
+              
+              2nd byte : Immediate value (when immediate selected)
 
-　8 : SUB A and B or Immediate values, PUSH result and change flags
-          | 1:0 |
-            0:AB
-            none : Immediate
+- opecode 8 : SUB
 
-　a : CMP sub A and B or Immediate values, and only change flags, not pushed result
-          | 1:0 |
-            0:AB
-            none : Immediate
+              Subtract from reg_a to reg_b or Immediate value, push result to data stack and change flags
+              
+              bit 0: Subtract from reg_a to reg_b
+              
+              none : Subtract from reg_a to Immediate
+              
+              2nd byte : Immediate value (when immediate selected)
 
-　c : OUT pop and output poped data to port#'s port 
+- opecode a : SUB
 
-　e : CLR clear stack and all flags
+              Subtract from reg_a to reg_b or Immediate value, and only change flags
+              
+              bit 0: Subtract from reg_a to reg_b
+              
+              none : Subtract from reg_a to Immediate
+              
+              2nd byte : Immediate value (when immediate selected)
 
-  f : NOP only step pc up
+- opecode c : OUT
+
+              Pop a data and output poped data to port#'s port, reg_a and reg_b also changed as POP
+              
+              2nd byte : port# ( only port 0 is impremented for LED )
+
+- opecode e : CLR
+
+              Clear data stack pointer to zero and clear all flags to zero
+
+- opecode f : NOP
+
+              Only step PC up
+
+
+
+
+
 
 
