@@ -129,7 +129,4 @@ Command g and s : Output log to uart. Each instruction makes log
 Command r and p : Dump memory with 4 bytes per line.
 
 
-
-
-
-
+Author Yoshiki Kurokawa @yoshiki9636
