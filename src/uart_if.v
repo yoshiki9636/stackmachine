@@ -1,4 +1,12 @@
-// Tang Nano UART monitor by yoshiki9636
+/*
+ * Stack Machine CPU Sample
+ *   UART Monitor Interface Module for Tang Nano
+ *    Verilog code
+ * @auther		Yoshiki Kurokawa <yoshiki.k963@gmail.com>
+ * @copylight	2020 Yoshiki Kurokawa
+ * @license		https://opensource.org/licenses/MIT     MIT license
+ * @version		0.1
+ */
 
 module uart_if (
     input clk,

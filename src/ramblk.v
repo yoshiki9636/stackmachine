@@ -1,3 +1,13 @@
+/*
+ * Stack Machine CPU Sample
+ *   RAM Block Module for Tang Nano
+ *    Verilog code
+ * @auther		Yoshiki Kurokawa <yoshiki.k963@gmail.com>
+ * @copylight	2020 Yoshiki Kurokawa
+ * @license		https://opensource.org/licenses/MIT     MIT license
+ * @version		0.1
+ */
+
 module ramblk(
 	input clk,
 	// from cpu
