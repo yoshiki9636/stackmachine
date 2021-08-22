@@ -26,10 +26,11 @@ module uart_if (
 );
 
 // uart connection
-reg tx_en ;
+reg tx_enr ;
+wire tx_en ;
 wire [2:0] wadr;
 reg [7:0] wdata;
-reg rx_en; 
+wire rx_en; 
 wire [2:0] radr;
 wire [7:0] rdata;
 wire rx_rdy_n = 1'b1;
@@ -52,12 +53,17 @@ wire [7:0] send_char;
 wire send_en;
 
 // rx read enable maker
+reg [1:0] rxen_cntr;
 always @ (posedge clk or negedge rst_n) begin
     if (~rst_n)
-        rx_en <= 1'b0 ;
+        rxen_cntr <= 2'b00;
+	else if (rxen_cntr >= 2'b10)
+		rxen_cntr <= 2'b00;
     else
-        rx_en <= ~rx_en ;
+		rxen_cntr <= rxen_cntr + 2'b01;
 end
+assign rx_en = | rxen_cntr;
+
 // data read enable :  1:read rx-data  0:read rxrdy
 assign rdd = rx_rdy & rx_en ;
 // register address : 3'd0:rx-data 3'd5:rxrdy
@@ -102,10 +108,14 @@ end
 // tx data enable
 always @ (posedge clk or negedge rst_n) begin
     if (~rst_n)
-        tx_en <= 1'b0 ;
+        tx_enr <= 1'b0 ;
     else
-        tx_en <= rx_dv | send_en ;
+        tx_enr <= rx_dv ;
 end
+
+assign tx_en = tx_enr & ~rx_dv | send_en; 
+
+
 // tx write address : 3'd0 fixed
 assign wadr = 3'd0 ;
 // uart master IP
@@ -148,7 +158,7 @@ always @ (posedge clk or negedge rst_n) begin
     if (~rst_n)
         rout_en <= 1'b0;
     else
-        rout_en <= rx_rdy & ~rx_rdy_dly ;
+        rout_en <= ~rx_rdy & rx_rdy_dly ;
 end
 
 // tx send out
