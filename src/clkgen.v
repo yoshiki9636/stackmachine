@@ -8,11 +8,16 @@
  * @version		0.1
  */
 
+//`define SIMULATION
+
 module clkgen (
+`ifdef SIMULATION
     output reg clk
+`else
+    output clk
+`endif
 );
 
-`define SIMULATION
 `ifdef SIMULATION
 initial clk = 0;
 
@@ -24,7 +29,7 @@ wire oscclk;
 Gowin_OSC osc1(
         .oscout(oscclk) //output oscout
 );
-Gowin_PLL pll1(
+Gowin_rPLL pll1(
     .clkout(clk), //output clkout
     .clkin(oscclk) //input clkin
 );
